@@ -6078,13 +6078,5 @@
         "description": "A media file that may be played back."
       }
     }
-  },
-    "security": [
-        {
-            "apiKeyHeader": []
-        },
-        {
-            "apiKeyQuery": []
-        }
-    ]
+  }
 }
