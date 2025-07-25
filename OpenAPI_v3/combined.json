@@ -9,9 +9,56 @@
             "url": "http://127.0.0.1:8088/ari"
         }
     ],
+    "tags": [
+        {
+            "name": "Applications",
+            "description": "Stasis applications for real-time communication"
+        },
+        {
+            "name": "Asterisk",
+            "description": "Asterisk system management including configuration, modules, logging, and variables"
+        },
+        {
+            "name": "Bridges",
+            "description": "Bridge management for connecting channels"
+        },
+        {
+            "name": "Channels",
+            "description": "Channel management and control operations"
+        },
+        {
+            "name": "Device States",
+            "description": "Device state management and monitoring"
+        },
+        {
+            "name": "Endpoints",
+            "description": "Endpoint management and messaging"
+        },
+        {
+            "name": "Events",
+            "description": "Event handling and WebSocket connections"
+        },
+        {
+            "name": "Mailboxes",
+            "description": "Mailbox state management"
+        },
+        {
+            "name": "Playbacks",
+            "description": "Media playback control"
+        },
+        {
+            "name": "Recordings",
+            "description": "Recording management for live and stored recordings"
+        },
+        {
+            "name": "Sounds",
+            "description": "Sound file management and retrieval"
+        }
+    ],
   "paths": {
     "/applications": {
       "get": {
+        "tags": ["Applications"],
         "summary": "List all applications.",
         "operationId": "list",
         "responses": {
@@ -33,6 +80,7 @@
     },
     "/applications/{applicationName}": {
       "get": {
+        "tags": ["Applications"],
         "summary": "Get details of an application.",
         "operationId": "get",
         "parameters": [
@@ -62,6 +110,7 @@
     },
     "/applications/{applicationName}/eventFilter": {
       "put": {
+        "tags": ["Applications"],
         "summary": "Filter application events types.",
         "description": "Allowed and/or disallowed event type filtering can be done. The body (parameter) should specify a JSON key/value object that describes the type of event filtering needed. One, or both of the following keys can be designated:<br /><br />\"allowed\" - Specifies an allowed list of event types<br />\"disallowed\" - Specifies a disallowed list of event types<br /><br />Further, each of those key's value should be a JSON array that holds zero, or more JSON key/value objects. Each of these objects must contain the following key with an associated value:<br /><br />\"type\" - The type name of the event to filter<br /><br />The value must be the string name (case sensitive) of the event type that needs filtering. For example:<br /><br />{ \"allowed\": [ { \"type\": \"StasisStart\" }, { \"type\": \"StasisEnd\" } ] }<br /><br />As this specifies only an allowed list, then only those two event type messages are sent to the application. No other event messages are sent.<br /><br />The following rules apply:<br /><br />* If the body is empty, both the allowed and disallowed filters are set empty.<br />* If both list types are given then both are set to their respective values (note, specifying an empty array for a given type sets that type to empty).<br />* If only one list type is given then only that type is set. The other type is not updated.<br />* An empty \"allowed\" list means all events are allowed.<br />* An empty \"disallowed\" list means no events are disallowed.<br />* Disallowed events take precedence over allowed events if the event type is specified in both lists.",
         "operationId": "filter",
@@ -104,6 +153,7 @@
     },
     "/applications/{applicationName}/subscription": {
       "post": {
+        "tags": ["Applications"],
         "summary": "Subscribe an application to a event source.",
         "description": "Returns the state of the application after the subscriptions have changed",
         "operationId": "subscribe",
@@ -146,6 +196,7 @@
         }
       },
       "delete": {
+        "tags": ["Applications"],
         "summary": "Unsubscribe an application from an event source.",
         "description": "Returns the state of the application after the subscriptions have changed",
         "operationId": "unsubscribe",
@@ -190,6 +241,7 @@
     },
     "/asterisk/config/dynamic/{configClass}/{objectType}/{id}": {
       "get": {
+        "tags": ["Asterisk"],
         "summary": "Retrieve a dynamic configuration object.",
         "operationId": "getObject",
         "parameters": [
@@ -238,6 +290,7 @@
         }
       },
       "put": {
+        "tags": ["Asterisk"],
         "summary": "Create or update a dynamic configuration object.",
         "operationId": "updateObject",
         "parameters": [
@@ -296,6 +349,7 @@
         "x-codegen-request-body-name": "fields"
       },
       "delete": {
+        "tags": ["Asterisk"],
         "summary": "Delete a dynamic configuration object.",
         "operationId": "deleteObject",
         "parameters": [
@@ -337,6 +391,7 @@
     },
     "/asterisk/info": {
       "get": {
+        "tags": ["Asterisk"],
         "summary": "Gets Asterisk system information.",
         "operationId": "getInfo",
         "parameters": [
@@ -370,6 +425,7 @@
     },
     "/asterisk/logging": {
       "get": {
+        "tags": ["Asterisk"],
         "summary": "Gets Asterisk log channel information.",
         "operationId": "listLogChannels",
         "responses": {
@@ -391,6 +447,7 @@
     },
     "/asterisk/logging/{logChannelName}": {
       "post": {
+        "tags": ["Asterisk"],
         "summary": "Adds a log channel.",
         "operationId": "addLog",
         "parameters": [
@@ -421,6 +478,7 @@
         }
       },
       "delete": {
+        "tags": ["Asterisk"],
         "summary": "Deletes a log channel.",
         "operationId": "deleteLog",
         "parameters": [
@@ -444,6 +502,7 @@
     },
     "/asterisk/logging/{logChannelName}/rotate": {
       "put": {
+        "tags": ["Asterisk"],
         "summary": "Rotates a log channel.",
         "operationId": "rotateLog",
         "parameters": [
@@ -467,6 +526,7 @@
     },
     "/asterisk/modules": {
       "get": {
+        "tags": ["Asterisk"],
         "summary": "List Asterisk modules.",
         "operationId": "listModules",
         "responses": {
@@ -488,6 +548,7 @@
     },
     "/asterisk/modules/{moduleName}": {
       "get": {
+        "tags": ["Asterisk"],
         "summary": "Get Asterisk module information.",
         "operationId": "getModule",
         "parameters": [
@@ -515,6 +576,7 @@
         }
       },
       "put": {
+        "tags": ["Asterisk"],
         "summary": "Reload an Asterisk module.",
         "operationId": "reloadModule",
         "parameters": [
@@ -536,6 +598,7 @@
         }
       },
       "post": {
+        "tags": ["Asterisk"],
         "summary": "Load an Asterisk module.",
         "operationId": "loadModule",
         "parameters": [
@@ -557,6 +620,7 @@
         }
       },
       "delete": {
+        "tags": ["Asterisk"],
         "summary": "Unload an Asterisk module.",
         "operationId": "unloadModule",
         "parameters": [
@@ -580,6 +644,7 @@
     },
     "/asterisk/ping": {
       "get": {
+        "tags": ["Asterisk"],
         "summary": "Response pong message.",
         "operationId": "ping",
         "responses": {
@@ -598,6 +663,7 @@
     },
     "/asterisk/variable": {
       "get": {
+        "tags": ["Asterisk"],
         "summary": "Get the value of a global variable.",
         "operationId": "getGlobalVar",
         "parameters": [
@@ -625,6 +691,7 @@
         }
       },
       "post": {
+        "tags": ["Asterisk"],
         "summary": "Set the value of a global variable.",
         "operationId": "setGlobalVar",
         "parameters": [
@@ -656,6 +723,7 @@
     },
     "/bridges": {
       "get": {
+        "tags": ["Bridges"],
         "summary": "List all active bridges in Asterisk.",
         "operationId": "list",
         "responses": {
@@ -675,6 +743,7 @@
         }
       },
       "post": {
+        "tags": ["Bridges"],
         "summary": "Create a new bridge.",
         "description": "This bridge persists until it has been shut down, or Asterisk has been shut down.",
         "operationId": "create",
@@ -729,6 +798,7 @@
     },
     "/bridges/{bridgeId}": {
       "get": {
+        "tags": ["Bridges"],
         "summary": "Get bridge details.",
         "operationId": "get",
         "parameters": [
@@ -758,6 +828,7 @@
         }
       },
       "post": {
+        "tags": ["Bridges"],
         "summary": "Create a new bridge or updates an existing one.",
         "description": "This bridge persists until it has been shut down, or Asterisk has been shut down.",
         "operationId": "createWithId",
@@ -810,6 +881,7 @@
         }
       },
       "delete": {
+        "tags": ["Bridges"],
         "summary": "Shut down a bridge.",
         "description": "If any channels are in this bridge, they will be removed and resume whatever they were doing beforehand.",
         "operationId": "destroy",
@@ -836,6 +908,7 @@
     },
     "/bridges/{bridgeId}/addChannel": {
       "post": {
+        "tags": ["Bridges"],
         "summary": "Add a channel to a bridge.",
         "operationId": "addChannel",
         "parameters": [
@@ -922,6 +995,7 @@
     },
     "/bridges/{bridgeId}/moh": {
       "post": {
+        "tags": ["Bridges"],
         "summary": "Play music on hold to a bridge or change the MOH class that is playing.",
         "operationId": "startMoh",
         "parameters": [
@@ -956,6 +1030,7 @@
         }
       },
       "delete": {
+        "tags": ["Bridges"],
         "summary": "Stop playing music on hold to a bridge.",
         "description": "This will only stop music on hold being played via POST bridges/{bridgeId}/moh.",
         "operationId": "stopMoh",
@@ -982,6 +1057,7 @@
     },
     "/bridges/{bridgeId}/play": {
       "post": {
+        "tags": ["Bridges"],
         "summary": "Start playback of media on a bridge.",
         "description": "The media URI may be any of a number of URI's. Currently sound:, recording:, number:, digits:, characters:, and tone: URI's are supported. This operation creates a playback resource that can be used to control the playback of media (pause, rewind, fast forward, etc.)",
         "operationId": "play",
@@ -1076,6 +1152,7 @@
     },
     "/bridges/{bridgeId}/play/{playbackId}": {
       "post": {
+        "tags": ["Bridges"],
         "summary": "Start playback of media on a bridge.",
         "description": "The media URI may be any of a number of URI's. Currently sound:, recording:, number:, digits:, characters:, and tone: URI's are supported. This operation creates a playback resource that can be used to control the playback of media (pause, rewind, fast forward, etc.)",
         "operationId": "playWithId",
@@ -1170,6 +1247,7 @@
     },
     "/bridges/{bridgeId}/record": {
       "post": {
+        "tags": ["Bridges"],
         "summary": "Start a recording.",
         "description": "This records the mixed audio from all channels participating in this bridge.",
         "operationId": "record",
@@ -1286,6 +1364,7 @@
     },
     "/bridges/{bridgeId}/removeChannel": {
       "post": {
+        "tags": ["Bridges"],
         "summary": "Remove a channel from a bridge.",
         "operationId": "removeChannel",
         "parameters": [
@@ -1325,6 +1404,7 @@
     },
     "/bridges/{bridgeId}/videoSource": {
       "delete": {
+        "tags": ["Bridges"],
         "summary": "Removes any explicit video source in a multi-party mixing bridge. This operation has no effect on bridges with two or fewer participants. When no explicit video source is set, talk detection will be used to determine the active video stream.",
         "operationId": "clearVideoSource",
         "parameters": [
@@ -1350,6 +1430,7 @@
     },
     "/bridges/{bridgeId}/videoSource/{channelId}": {
       "post": {
+        "tags": ["Bridges"],
         "summary": "Set a channel as the video source in a multi-party mixing bridge. This operation has no effect on bridges with two or fewer participants.",
         "operationId": "setVideoSource",
         "parameters": [
@@ -1386,6 +1467,7 @@
     },
     "/channels": {
       "get": {
+        "tags": ["Channels"],
         "summary": "List all active channels in Asterisk.",
         "operationId": "list",
         "responses": {
@@ -1405,6 +1487,7 @@
         }
       },
       "post": {
+        "tags": ["Channels"],
         "summary": "Create a new channel (originate).",
         "description": "The new channel is created immediately and a snapshot of it returned. If a Stasis application is provided it will be automatically subscribed to the originated channel for further events and updates.",
         "operationId": "originate",
@@ -1552,6 +1635,7 @@
     },
     "/channels/create": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Create channel.",
         "operationId": "create",
         "parameters": [
@@ -1640,6 +1724,7 @@
     },
     "/channels/externalMedia": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Start an External Media session.",
         "description": "Create a channel to an External Media source/sink.",
         "operationId": "externalMedia",
@@ -1750,6 +1835,7 @@
     },
     "/channels/{channelId}": {
       "get": {
+        "tags": ["Channels"],
         "summary": "Channel details.",
         "operationId": "get",
         "parameters": [
@@ -1777,6 +1863,7 @@
         }
       },
       "post": {
+        "tags": ["Channels"],
         "summary": "Create a new channel (originate with id).",
         "description": "The new channel is created immediately and a snapshot of it returned. If a Stasis application is provided it will be automatically subscribed to the originated channel for further events and updates.",
         "operationId": "originateWithId",
@@ -1923,6 +2010,7 @@
         "x-codegen-request-body-name": "variables"
       },
       "delete": {
+        "tags": ["Channels"],
         "summary": "Delete (i.e. hangup) a channel.",
         "operationId": "hangup",
         "parameters": [
@@ -1962,6 +2050,7 @@
     },
     "/channels/{channelId}/answer": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Answer a channel.",
         "operationId": "answer",
         "parameters": [
@@ -1985,6 +2074,7 @@
     },
     "/channels/{channelId}/continue": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Exit application; continue execution in the dialplan.",
         "operationId": "continueInDialplan",
         "parameters": [
@@ -2041,6 +2131,7 @@
     },
     "/channels/{channelId}/dial": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Dial a created channel.",
         "operationId": "dial",
         "parameters": [
@@ -2082,6 +2173,7 @@
     },
     "/channels/{channelId}/dtmf": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Send provided DTMF to a given channel.",
         "operationId": "sendDTMF",
         "parameters": [
@@ -2153,6 +2245,7 @@
     },
     "/channels/{channelId}/hold": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Hold a channel.",
         "operationId": "hold",
         "parameters": [
@@ -2174,6 +2267,7 @@
         }
       },
       "delete": {
+        "tags": ["Channels"],
         "summary": "Remove a channel from hold.",
         "operationId": "unhold",
         "parameters": [
@@ -2197,6 +2291,7 @@
     },
     "/channels/{channelId}/moh": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Play music on hold to a channel.",
         "description": "Using media operations such as /play on a channel playing MOH in this manner will suspend MOH without resuming automatically. If continuing music on hold is desired, the stasis application must reinitiate music on hold.",
         "operationId": "startMoh",
@@ -2227,6 +2322,7 @@
         }
       },
       "delete": {
+        "tags": ["Channels"],
         "summary": "Stop playing music on hold to a channel.",
         "operationId": "stopMoh",
         "parameters": [
@@ -2250,6 +2346,7 @@
     },
     "/channels/{channelId}/move": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Move the channel from one Stasis application to another.",
         "operationId": "move",
         "parameters": [
@@ -2290,6 +2387,7 @@
     },
     "/channels/{channelId}/mute": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Mute a channel.",
         "operationId": "mute",
         "parameters": [
@@ -2320,6 +2418,7 @@
         }
       },
       "delete": {
+        "tags": ["Channels"],
         "summary": "Unmute a channel.",
         "operationId": "unmute",
         "parameters": [
@@ -2352,6 +2451,7 @@
     },
     "/channels/{channelId}/play": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Start playback of media.",
         "description": "The media URI may be any of a number of URI's. Currently sound:, recording:, number:, digits:, characters:, and tone: URI's are supported. This operation creates a playback resource that can be used to control the playback of media (pause, rewind, fast forward, etc.)",
         "operationId": "play",
@@ -2431,6 +2531,7 @@
     },
     "/channels/{channelId}/play/{playbackId}": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Start playback of media and specify the playbackId.",
         "description": "The media URI may be any of a number of URI's. Currently sound:, recording:, number:, digits:, characters:, and tone: URI's are supported. This operation creates a playback resource that can be used to control the playback of media (pause, rewind, fast forward, etc.)",
         "operationId": "playWithId",
@@ -2511,6 +2612,7 @@
     },
     "/channels/{channelId}/record": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Start a recording.",
         "description": "Record audio from a channel. Note that this will not capture audio sent to the channel. The bridge itself has a record feature if that's what you want.",
         "operationId": "record",
@@ -2606,6 +2708,7 @@
     },
     "/channels/{channelId}/redirect": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Redirect the channel to a different location.",
         "operationId": "redirect",
         "parameters": [
@@ -2638,6 +2741,7 @@
     },
     "/channels/{channelId}/ring": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Indicate ringing to a channel.",
         "operationId": "ring",
         "parameters": [
@@ -2659,6 +2763,7 @@
         }
       },
       "delete": {
+        "tags": ["Channels"],
         "summary": "Stop ringing indication on a channel if locally generated.",
         "operationId": "ringStop",
         "parameters": [
@@ -2682,6 +2787,7 @@
     },
     "/channels/{channelId}/rtp_statistics": {
       "get": {
+        "tags": ["Channels"],
         "summary": "RTP stats on a channel.",
         "operationId": "rtpstatistics",
         "parameters": [
@@ -2711,6 +2817,7 @@
     },
     "/channels/{channelId}/silence": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Play silence to a channel.",
         "description": "Using media operations such as /play on a channel playing silence in this manner will suspend silence without resuming automatically.",
         "operationId": "startSilence",
@@ -2733,6 +2840,7 @@
         }
       },
       "delete": {
+        "tags": ["Channels"],
         "summary": "Stop playing silence to a channel.",
         "operationId": "stopSilence",
         "parameters": [
@@ -2756,6 +2864,7 @@
     },
     "/channels/{channelId}/snoop": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Start snooping.",
         "description": "Snoop (spy/whisper) on a specific channel.",
         "operationId": "snoopChannel",
@@ -2829,6 +2938,7 @@
     },
     "/channels/{channelId}/snoop/{snoopId}": {
       "post": {
+        "tags": ["Channels"],
         "summary": "Start snooping.",
         "description": "Snoop (spy/whisper) on a specific channel.",
         "operationId": "snoopChannelWithId",
@@ -2903,6 +3013,7 @@
     },
     "/channels/{channelId}/variable": {
       "get": {
+        "tags": ["Channels"],
         "summary": "Get the value of a channel variable or function.",
         "operationId": "getChannelVar",
         "parameters": [
@@ -2939,6 +3050,7 @@
         }
       },
       "post": {
+        "tags": ["Channels"],
         "summary": "Set the value of a channel variable or function.",
         "operationId": "setChannelVar",
         "parameters": [
@@ -2979,6 +3091,7 @@
     },
     "/deviceStates": {
       "get": {
+        "tags": ["Device States"],
         "summary": "List all ARI controlled device states.",
         "operationId": "list",
         "responses": {
@@ -3000,6 +3113,7 @@
     },
     "/deviceStates/{deviceName}": {
       "get": {
+        "tags": ["Device States"],
         "summary": "Retrieve the current state of a device.",
         "operationId": "get",
         "parameters": [
@@ -3027,6 +3141,7 @@
         }
       },
       "put": {
+        "tags": ["Device States"],
         "summary": "Change the state of a device controlled by ARI. (Note - implicitly creates the device state).",
         "operationId": "update",
         "parameters": [
@@ -3057,6 +3172,7 @@
         }
       },
       "delete": {
+        "tags": ["Device States"],
         "summary": "Destroy a device-state controlled by ARI.",
         "operationId": "delete",
         "parameters": [
@@ -3080,6 +3196,7 @@
     },
     "/endpoints": {
       "get": {
+        "tags": ["Endpoints"],
         "summary": "List all endpoints.",
         "operationId": "list",
         "responses": {
@@ -3101,6 +3218,7 @@
     },
     "/endpoints/sendMessage": {
       "put": {
+        "tags": ["Endpoints"],
         "summary": "Send a message to some technology URI or endpoint.",
         "operationId": "sendMessage",
         "parameters": [
@@ -3150,6 +3268,7 @@
     },
     "/endpoints/{tech}": {
       "get": {
+        "tags": ["Endpoints"],
         "summary": "List available endoints for a given endpoint technology.",
         "operationId": "listByTech",
         "parameters": [
@@ -3182,6 +3301,7 @@
     },
     "/endpoints/{tech}/{resource}": {
       "get": {
+        "tags": ["Endpoints"],
         "summary": "Details for an endpoint.",
         "operationId": "get",
         "parameters": [
@@ -3220,6 +3340,7 @@
     },
     "/endpoints/{tech}/{resource}/sendMessage": {
       "put": {
+        "tags": ["Endpoints"],
         "summary": "Send a message to some endpoint in a technology.",
         "operationId": "sendMessageToEndpoint",
         "parameters": [
@@ -3278,6 +3399,7 @@
     },
     "/events": {
       "get": {
+        "tags": ["Events"],
         "summary": "WebSocket connection for events.",
         "operationId": "eventWebsocket",
         "parameters": [
@@ -3320,6 +3442,7 @@
     },
     "/events/user/{eventName}": {
       "post": {
+        "tags": ["Events"],
         "summary": "Generate a user event.",
         "operationId": "userEvent",
         "parameters": [
@@ -3375,6 +3498,7 @@
     },
     "/mailboxes": {
       "get": {
+        "tags": ["Mailboxes"],
         "summary": "List all mailboxes.",
         "operationId": "list",
         "responses": {
@@ -3396,6 +3520,7 @@
     },
     "/mailboxes/{mailboxName}": {
       "get": {
+        "tags": ["Mailboxes"],
         "summary": "Retrieve the current state of a mailbox.",
         "operationId": "get",
         "parameters": [
@@ -3423,6 +3548,7 @@
         }
       },
       "put": {
+        "tags": ["Mailboxes"],
         "summary": "Change the state of a mailbox. (Note - implicitly creates the mailbox).",
         "operationId": "update",
         "parameters": [
@@ -3464,6 +3590,7 @@
         }
       },
       "delete": {
+        "tags": ["Mailboxes"],
         "summary": "Destroy a mailbox.",
         "operationId": "delete",
         "parameters": [
@@ -3487,6 +3614,7 @@
     },
     "/playbacks/{playbackId}": {
       "get": {
+        "tags": ["Playbacks"],
         "summary": "Get a playback's details.",
         "operationId": "get",
         "parameters": [
@@ -3514,6 +3642,7 @@
         }
       },
       "delete": {
+        "tags": ["Playbacks"],
         "summary": "Stop a playback.",
         "operationId": "stop",
         "parameters": [
@@ -3537,6 +3666,7 @@
     },
     "/playbacks/{playbackId}/control": {
       "post": {
+        "tags": ["Playbacks"],
         "summary": "Control a playback.",
         "operationId": "control",
         "parameters": [
@@ -3569,6 +3699,7 @@
     },
     "/recordings/live/{recordingName}": {
       "get": {
+        "tags": ["Recordings"],
         "summary": "List live recordings.",
         "operationId": "getLive",
         "parameters": [
@@ -3596,6 +3727,7 @@
         }
       },
       "delete": {
+        "tags": ["Recordings"],
         "summary": "Stop a live recording and discard it.",
         "operationId": "cancel",
         "parameters": [
@@ -3619,6 +3751,7 @@
     },
     "/recordings/live/{recordingName}/mute": {
       "post": {
+        "tags": ["Recordings"],
         "summary": "Mute a live recording.",
         "description": "Muting a recording suspends silence detection, which will be restarted when the recording is unmuted.",
         "operationId": "mute",
@@ -3641,6 +3774,7 @@
         }
       },
       "delete": {
+        "tags": ["Recordings"],
         "summary": "Unmute a live recording.",
         "operationId": "unmute",
         "parameters": [
@@ -3664,6 +3798,7 @@
     },
     "/recordings/live/{recordingName}/pause": {
       "post": {
+        "tags": ["Recordings"],
         "summary": "Pause a live recording.",
         "description": "Pausing a recording suspends silence detection, which will be restarted when the recording is unpaused. Paused time is not included in the accounting for maxDurationSeconds.",
         "operationId": "pause",
@@ -3686,6 +3821,7 @@
         }
       },
       "delete": {
+        "tags": ["Recordings"],
         "summary": "Unpause a live recording.",
         "operationId": "unpause",
         "parameters": [
@@ -3709,6 +3845,7 @@
     },
     "/recordings/live/{recordingName}/stop": {
       "post": {
+        "tags": ["Recordings"],
         "summary": "Stop a live recording and store it.",
         "operationId": "stop",
         "parameters": [
@@ -3732,6 +3869,7 @@
     },
     "/recordings/stored": {
       "get": {
+        "tags": ["Recordings"],
         "summary": "List recordings that are complete.",
         "operationId": "listStored",
         "responses": {
@@ -3753,6 +3891,7 @@
     },
     "/recordings/stored/{recordingName}": {
       "get": {
+        "tags": ["Recordings"],
         "summary": "Get a stored recording's details.",
         "operationId": "getStored",
         "parameters": [
@@ -3780,6 +3919,7 @@
         }
       },
       "delete": {
+        "tags": ["Recordings"],
         "summary": "Delete a stored recording.",
         "operationId": "deleteStored",
         "parameters": [
@@ -3803,6 +3943,7 @@
     },
     "/recordings/stored/{recordingName}/copy": {
       "post": {
+        "tags": ["Recordings"],
         "summary": "Copy a stored recording.",
         "operationId": "copyStored",
         "parameters": [
@@ -3841,6 +3982,7 @@
     },
     "/recordings/stored/{recordingName}/file": {
       "get": {
+        "tags": ["Recordings"],
         "summary": "Get the file associated with the stored recording.",
         "operationId": "getStoredFile",
         "parameters": [
@@ -3872,6 +4014,7 @@
     },
     "/sounds": {
       "get": {
+        "tags": ["Sounds"],
         "summary": "List all sounds.",
         "operationId": "list",
         "parameters": [
@@ -3911,6 +4054,7 @@
     },
     "/sounds/{soundId}": {
       "get": {
+        "tags": ["Sounds"],
         "summary": "Get a sound's details.",
         "operationId": "get",
         "parameters": [
