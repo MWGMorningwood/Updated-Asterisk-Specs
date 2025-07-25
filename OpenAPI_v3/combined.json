@@ -1,12 +1,12 @@
 {
     "openapi": "3.0.1",
     "info": {
-        "title": "Asterisk REST Interface (ARI) - Combined",
+        "title": "Asterisk REST Interface (ARI)",
         "version": "2.0.0"
     },
     "servers": [
         {
-            "url": "http://127.0.0.1:8088/ari"
+            "url": "https://yourpbx.com/ARI"
         }
     ],
     "tags": [
@@ -60,7 +60,7 @@
       "get": {
         "tags": ["Applications"],
         "summary": "List all applications.",
-        "operationId": "list",
+        "operationId": "listApplications",
         "responses": {
           "200": {
             "description": "No response was specified",
@@ -82,7 +82,7 @@
       "get": {
         "tags": ["Applications"],
         "summary": "Get details of an application.",
-        "operationId": "get",
+        "operationId": "getApplication",
         "parameters": [
           {
             "name": "applicationName",
@@ -725,7 +725,7 @@
       "get": {
         "tags": ["Bridges"],
         "summary": "List all active bridges in Asterisk.",
-        "operationId": "list",
+        "operationId": "listBridges",
         "responses": {
           "200": {
             "description": "No response was specified",
@@ -746,7 +746,7 @@
         "tags": ["Bridges"],
         "summary": "Create a new bridge.",
         "description": "This bridge persists until it has been shut down, or Asterisk has been shut down.",
-        "operationId": "create",
+        "operationId": "createBridge",
         "parameters": [
           {
             "name": "type",
@@ -800,7 +800,7 @@
       "get": {
         "tags": ["Bridges"],
         "summary": "Get bridge details.",
-        "operationId": "get",
+        "operationId": "getBridge",
         "parameters": [
           {
             "name": "bridgeId",
@@ -997,7 +997,7 @@
       "post": {
         "tags": ["Bridges"],
         "summary": "Play music on hold to a bridge or change the MOH class that is playing.",
-        "operationId": "startMoh",
+        "operationId": "startBridgeMoh",
         "parameters": [
           {
             "name": "bridgeId",
@@ -1033,7 +1033,7 @@
         "tags": ["Bridges"],
         "summary": "Stop playing music on hold to a bridge.",
         "description": "This will only stop music on hold being played via POST bridges/{bridgeId}/moh.",
-        "operationId": "stopMoh",
+        "operationId": "stopBridgeMoh",
         "parameters": [
           {
             "name": "bridgeId",
@@ -1060,7 +1060,7 @@
         "tags": ["Bridges"],
         "summary": "Start playback of media on a bridge.",
         "description": "The media URI may be any of a number of URI's. Currently sound:, recording:, number:, digits:, characters:, and tone: URI's are supported. This operation creates a playback resource that can be used to control the playback of media (pause, rewind, fast forward, etc.)",
-        "operationId": "play",
+        "operationId": "playBridgeMedia",
         "parameters": [
           {
             "name": "bridgeId",
@@ -1155,7 +1155,7 @@
         "tags": ["Bridges"],
         "summary": "Start playback of media on a bridge.",
         "description": "The media URI may be any of a number of URI's. Currently sound:, recording:, number:, digits:, characters:, and tone: URI's are supported. This operation creates a playback resource that can be used to control the playback of media (pause, rewind, fast forward, etc.)",
-        "operationId": "playWithId",
+        "operationId": "playBridgeMediaWithId",
         "parameters": [
           {
             "name": "bridgeId",
@@ -1250,7 +1250,7 @@
         "tags": ["Bridges"],
         "summary": "Start a recording.",
         "description": "This records the mixed audio from all channels participating in this bridge.",
-        "operationId": "record",
+        "operationId": "recordBridge",
         "parameters": [
           {
             "name": "bridgeId",
@@ -1469,7 +1469,7 @@
       "get": {
         "tags": ["Channels"],
         "summary": "List all active channels in Asterisk.",
-        "operationId": "list",
+        "operationId": "listChannels",
         "responses": {
           "200": {
             "description": "No response was specified",
@@ -1637,7 +1637,7 @@
       "post": {
         "tags": ["Channels"],
         "summary": "Create channel.",
-        "operationId": "create",
+        "operationId": "createChannel",
         "parameters": [
           {
             "name": "endpoint",
@@ -1837,7 +1837,7 @@
       "get": {
         "tags": ["Channels"],
         "summary": "Channel details.",
-        "operationId": "get",
+        "operationId": "getChannel",
         "parameters": [
           {
             "name": "channelId",
@@ -2294,7 +2294,7 @@
         "tags": ["Channels"],
         "summary": "Play music on hold to a channel.",
         "description": "Using media operations such as /play on a channel playing MOH in this manner will suspend MOH without resuming automatically. If continuing music on hold is desired, the stasis application must reinitiate music on hold.",
-        "operationId": "startMoh",
+        "operationId": "startChannelMoh",
         "parameters": [
           {
             "name": "channelId",
@@ -2324,7 +2324,7 @@
       "delete": {
         "tags": ["Channels"],
         "summary": "Stop playing music on hold to a channel.",
-        "operationId": "stopMoh",
+        "operationId": "stopChannelMoh",
         "parameters": [
           {
             "name": "channelId",
@@ -2389,7 +2389,7 @@
       "post": {
         "tags": ["Channels"],
         "summary": "Mute a channel.",
-        "operationId": "mute",
+        "operationId": "muteChannel",
         "parameters": [
           {
             "name": "channelId",
@@ -2420,7 +2420,7 @@
       "delete": {
         "tags": ["Channels"],
         "summary": "Unmute a channel.",
-        "operationId": "unmute",
+        "operationId": "unmuteChannel",
         "parameters": [
           {
             "name": "channelId",
@@ -2454,7 +2454,7 @@
         "tags": ["Channels"],
         "summary": "Start playback of media.",
         "description": "The media URI may be any of a number of URI's. Currently sound:, recording:, number:, digits:, characters:, and tone: URI's are supported. This operation creates a playback resource that can be used to control the playback of media (pause, rewind, fast forward, etc.)",
-        "operationId": "play",
+        "operationId": "playChannelMedia",
         "parameters": [
           {
             "name": "channelId",
@@ -2534,7 +2534,7 @@
         "tags": ["Channels"],
         "summary": "Start playback of media and specify the playbackId.",
         "description": "The media URI may be any of a number of URI's. Currently sound:, recording:, number:, digits:, characters:, and tone: URI's are supported. This operation creates a playback resource that can be used to control the playback of media (pause, rewind, fast forward, etc.)",
-        "operationId": "playWithId",
+        "operationId": "playChannelMediaWithId",
         "parameters": [
           {
             "name": "channelId",
@@ -2615,7 +2615,7 @@
         "tags": ["Channels"],
         "summary": "Start a recording.",
         "description": "Record audio from a channel. Note that this will not capture audio sent to the channel. The bridge itself has a record feature if that's what you want.",
-        "operationId": "record",
+        "operationId": "recordChannel",
         "parameters": [
           {
             "name": "channelId",
@@ -3093,7 +3093,7 @@
       "get": {
         "tags": ["Device States"],
         "summary": "List all ARI controlled device states.",
-        "operationId": "list",
+        "operationId": "listDeviceStates",
         "responses": {
           "200": {
             "description": "No response was specified",
@@ -3115,7 +3115,7 @@
       "get": {
         "tags": ["Device States"],
         "summary": "Retrieve the current state of a device.",
-        "operationId": "get",
+        "operationId": "getDeviceState",
         "parameters": [
           {
             "name": "deviceName",
@@ -3143,7 +3143,7 @@
       "put": {
         "tags": ["Device States"],
         "summary": "Change the state of a device controlled by ARI. (Note - implicitly creates the device state).",
-        "operationId": "update",
+        "operationId": "updateDeviceState",
         "parameters": [
           {
             "name": "deviceName",
@@ -3174,7 +3174,7 @@
       "delete": {
         "tags": ["Device States"],
         "summary": "Destroy a device-state controlled by ARI.",
-        "operationId": "delete",
+        "operationId": "deleteDeviceState",
         "parameters": [
           {
             "name": "deviceName",
@@ -3198,7 +3198,7 @@
       "get": {
         "tags": ["Endpoints"],
         "summary": "List all endpoints.",
-        "operationId": "list",
+        "operationId": "listEndpoints",
         "responses": {
           "200": {
             "description": "No response was specified",
@@ -3303,7 +3303,7 @@
       "get": {
         "tags": ["Endpoints"],
         "summary": "Details for an endpoint.",
-        "operationId": "get",
+        "operationId": "getEndpoint",
         "parameters": [
           {
             "name": "tech",
@@ -3500,7 +3500,7 @@
       "get": {
         "tags": ["Mailboxes"],
         "summary": "List all mailboxes.",
-        "operationId": "list",
+        "operationId": "listMailboxes",
         "responses": {
           "200": {
             "description": "No response was specified",
@@ -3522,7 +3522,7 @@
       "get": {
         "tags": ["Mailboxes"],
         "summary": "Retrieve the current state of a mailbox.",
-        "operationId": "get",
+        "operationId": "getMailbox",
         "parameters": [
           {
             "name": "mailboxName",
@@ -3550,7 +3550,7 @@
       "put": {
         "tags": ["Mailboxes"],
         "summary": "Change the state of a mailbox. (Note - implicitly creates the mailbox).",
-        "operationId": "update",
+        "operationId": "updateMailbox",
         "parameters": [
           {
             "name": "mailboxName",
@@ -3592,7 +3592,7 @@
       "delete": {
         "tags": ["Mailboxes"],
         "summary": "Destroy a mailbox.",
-        "operationId": "delete",
+        "operationId": "deleteMailbox",
         "parameters": [
           {
             "name": "mailboxName",
@@ -3616,7 +3616,7 @@
       "get": {
         "tags": ["Playbacks"],
         "summary": "Get a playback's details.",
-        "operationId": "get",
+        "operationId": "getPlayback",
         "parameters": [
           {
             "name": "playbackId",
@@ -3644,7 +3644,7 @@
       "delete": {
         "tags": ["Playbacks"],
         "summary": "Stop a playback.",
-        "operationId": "stop",
+        "operationId": "stopPlayback",
         "parameters": [
           {
             "name": "playbackId",
@@ -3754,7 +3754,7 @@
         "tags": ["Recordings"],
         "summary": "Mute a live recording.",
         "description": "Muting a recording suspends silence detection, which will be restarted when the recording is unmuted.",
-        "operationId": "mute",
+        "operationId": "muteRecording",
         "parameters": [
           {
             "name": "recordingName",
@@ -3776,7 +3776,7 @@
       "delete": {
         "tags": ["Recordings"],
         "summary": "Unmute a live recording.",
-        "operationId": "unmute",
+        "operationId": "unmuteRecording",
         "parameters": [
           {
             "name": "recordingName",
@@ -3847,7 +3847,7 @@
       "post": {
         "tags": ["Recordings"],
         "summary": "Stop a live recording and store it.",
-        "operationId": "stop",
+        "operationId": "stopRecording",
         "parameters": [
           {
             "name": "recordingName",
@@ -4016,7 +4016,7 @@
       "get": {
         "tags": ["Sounds"],
         "summary": "List all sounds.",
-        "operationId": "list",
+        "operationId": "listSounds",
         "parameters": [
           {
             "name": "lang",
@@ -4056,7 +4056,7 @@
       "get": {
         "tags": ["Sounds"],
         "summary": "Get a sound's details.",
-        "operationId": "get",
+        "operationId": "getSound",
         "parameters": [
           {
             "name": "soundId",
@@ -6078,5 +6078,13 @@
         "description": "A media file that may be played back."
       }
     }
-  }
+  },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
 }
